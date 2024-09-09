@@ -11,7 +11,20 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120818_added_entity_PizzaMenu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120819_added_entity_MenuSection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120820_added_entity_Dish.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120821_added_entity_PizzaOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120822_added_entity_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120823_added_entity_PaymentMethod.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120824_added_entity_OrderStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120825_added_entity_PaymentStatus.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240909120818_added_entity_constraints_PizzaMenu.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120819_added_entity_constraints_MenuSection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120820_added_entity_constraints_Dish.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120821_added_entity_constraints_PizzaOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240909120822_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

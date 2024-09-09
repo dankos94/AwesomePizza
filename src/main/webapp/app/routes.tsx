@@ -14,6 +14,8 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
+import { useAppSelector } from 'app/config/store';
+import Wizard from 'app/modules/wizard/Wizard';
 
 const loading = <div>loading ...</div>;
 
@@ -57,6 +59,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="wizard" element={<Wizard />} />
         <Route
           path="*"
           element={

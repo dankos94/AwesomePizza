@@ -7,7 +7,15 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+        "pizzaMenu": "Pizza Menu",
+        "menuSection": "Menu Section",
+        "dish": "Dish",
+        "pizzaOrder": "Pizza Order",
+        "payment": "Payment",
+        "paymentMethod": "Payment Method",
+        "orderStatus": "Order Status",
+        "paymentStatus": "Payment Status"
       },
       "account": {
         "main": "Account",

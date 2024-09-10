@@ -47,7 +47,7 @@ export const OrderManagement = () => (
   <NavItem>
     <NavLink tag={Link} to="/order-management" className="d-flex align-items-center">
       <FontAwesomeIcon icon={faListCheck} />
-      <span>{'Make your new order now!'}</span>
+      <span>{'Manage orders'}</span>
     </NavLink>
   </NavItem>
 );

@@ -7,7 +7,7 @@ import { createEntity as createOrder } from 'app/entities/pizza-order/pizza-orde
 import { IDish } from 'app/shared/model/dish.model';
 import { IPaymentMethod } from 'app/shared/model/payment-method.model';
 import CartSidebar from './CartSidebar';
-import { Modal, ModalBody, ModalHeader, Spinner } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, Spinner } from 'reactstrap';
 import dayjs from 'dayjs';
 import { IPizzaOrder } from 'app/shared/model/pizza-order.model';
 
@@ -71,7 +71,6 @@ const Wizard: React.FC = () => {
             setPaymentStatus(2);
             setTimeout(() => {
               setShowPaymentModal(false);
-              alert('Ordine completato con successo!');
               setCart([]);
               setPaymentStatus(0);
             }, 2000);
@@ -113,15 +112,13 @@ const Wizard: React.FC = () => {
         </div>
       </div>
 
-      <Modal show={showPaymentModal} onHide={() => setShowPaymentModal(false)} centered>
+      <Modal isOpen={showPaymentModal} centered>
         <ModalHeader closeButton>{'Stato del pagamento'}</ModalHeader>
         <ModalBody>
           {paymentStatus === 1 && (
             <div className="d-flex justify-content-center align-items-center">
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">{'Pagamento in corso'}</span>
-              </Spinner>
-              <p className="ms-3">{'Pagamento in corso...'}</p>
+              <Spinner animation="border" role="status" />
+              <span className="ms-3">Pagamento in corso...</span>
             </div>
           )}
           {paymentStatus === 2 && <p>{"Pagamento accettato! L'ordine è stato completato."}</p>}

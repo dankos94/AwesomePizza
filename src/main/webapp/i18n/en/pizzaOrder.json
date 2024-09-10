@@ -1,0 +1,29 @@
+{
+  "awesomePizzaApp": {
+    "pizzaOrder": {
+      "home": {
+        "title": "Pizza Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pizza Order",
+        "createOrEditLabel": "Create or edit a Pizza Order",
+        "notFound": "No Pizza Orders found"
+      },
+      "created": "A new Pizza Order is created with identifier {{ param }}",
+      "updated": "A Pizza Order is updated with identifier {{ param }}",
+      "deleted": "A Pizza Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pizza Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Pizza Order"
+      },
+      "id": "ID",
+      "orderDate": "Order Date",
+      "totalPrice": "Total Price",
+      "payment": "Payment",
+      "user": "User",
+      "orderStatus": "Order Status",
+      "dish": "Dish"
+    }
+  }
+}

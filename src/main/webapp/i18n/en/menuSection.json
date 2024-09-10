@@ -1,0 +1,26 @@
+{
+  "awesomePizzaApp": {
+    "menuSection": {
+      "home": {
+        "title": "Menu Sections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Menu Section",
+        "createOrEditLabel": "Create or edit a Menu Section",
+        "notFound": "No Menu Sections found"
+      },
+      "created": "A new Menu Section is created with identifier {{ param }}",
+      "updated": "A Menu Section is updated with identifier {{ param }}",
+      "deleted": "A Menu Section is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Menu Section {{ id }}?"
+      },
+      "detail": {
+        "title": "Menu Section"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "pizzaMenu": "Pizza Menu"
+    }
+  }
+}

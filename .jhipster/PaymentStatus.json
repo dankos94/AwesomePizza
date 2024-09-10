@@ -1,0 +1,19 @@
+{
+  "annotations": {
+    "changelogDate": "20240909120825"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "statusName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "PaymentStatus",
+  "pagination": "no",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

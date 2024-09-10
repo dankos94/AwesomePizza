@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240909120819"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "MenuSection",
+  "relationships": [
+    {
+      "otherEntityName": "pizzaMenu",
+      "relationshipName": "pizzaMenu",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

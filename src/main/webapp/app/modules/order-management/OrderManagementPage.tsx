@@ -16,30 +16,27 @@ const OrderManagementPage: React.FC = () => {
   const orderStatuses: IOrderStatus[] = useAppSelector(state => state.orderStatus.entities);
   const dishes: IDish[] = useAppSelector(state => state.dish.entities);
   const authentication = useAppSelector(state => state.authentication);
-  const isAdmin = authentication?.authorities?.includes(AUTHORITIES.ADMIN);
+  const isAdmin = authentication?.account?.authorities?.includes(AUTHORITIES.ADMIN);
+
   const ordersFiltered = isAdmin ? orders : orders.filter(pzzOrd => pzzOrd.user.id === authentication?.account?.id);
 
-  /* eslint-disable no-console */
-  console.log('authentication', authentication);
-  const [clickedStatus, setClickedStatus] = useState<{ [key: number]: number }>({}); // Memorizza lo stato cliccato per ciascun ordine
+  const [clickedStatus, setClickedStatus] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
     dispatch(getOrders({}));
     dispatch(getOrderStatuses({}));
     dispatch(getDishes({}));
-  }, [dispatch]);
+  }, []);
 
-  // Funzione per aggiornare lo stato di un ordine
   const handleStatusChange = (order: IPizzaOrder, newStatus: IOrderStatus) => {
     const updatedOrder = {
       ...order,
       orderStatus: newStatus,
     };
     dispatch(updateOrder(updatedOrder));
-    setClickedStatus(prev => ({ ...prev, [order.id]: newStatus.id })); // Salva l'ID dello stato cliccato
+    setClickedStatus(prev => ({ ...prev, [order.id]: newStatus.id }));
   };
 
-  // Funzione per determinare quali bottoni sono abilitati o disabilitati e il loro colore
   const getButtonConfig = (statusId: number, buttonId: number) => {
     switch (statusId) {
       case 1: // Ricevuto
@@ -75,12 +72,27 @@ const OrderManagementPage: React.FC = () => {
     }
   };
 
-  // Funzione per determinare lo stile della riga dell'ordine
   const getRowStyle = (currentStatusId: number): string => {
     if (currentStatusId === 3) return 'table-danger'; // Rifiutato (riga rossa)
     if (currentStatusId === 8) return 'table-success'; // Consegnato (riga verde)
     if (currentStatusId !== 8 && !isAdmin) return 'table-warning';
     return ''; // Default nessuno
+  };
+
+  const getProgressColor = (statusId: number) => {
+    switch (statusId) {
+      case 3:
+        return 'danger'; // Rosso per rifiutato
+      case 8:
+        return 'success'; // Verde per consegnato
+      default:
+        return 'warning'; // Giallo per gli altri
+    }
+  };
+
+  const getProgressValue = (orderStatusId: number) => {
+    if (orderStatusId === 3) return 8;
+    return orderStatusId;
   };
 
   return (
@@ -127,7 +139,15 @@ const OrderManagementPage: React.FC = () => {
                   })}
                 </td>
               ) : (
-                <ProgressBar striped variant="warning" now={2 % 8} />
+                <td>
+                  <ProgressBar
+                    striped
+                    variant={getProgressColor(order.orderStatus.id)}
+                    min={1}
+                    now={getProgressValue(order.orderStatus.id)}
+                    max={8}
+                  />
+                </td>
               )}
             </tr>
           ))}

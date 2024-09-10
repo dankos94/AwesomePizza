@@ -1,0 +1,9 @@
+id;status_name
+1;Ricevuto
+2;Accettato
+3;Rifiutato
+4;Assegnato
+5;In preparazione
+6;Ritirato
+7;In consegna
+8;Consegnato

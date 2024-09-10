@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity PizzaOrder.
+    -->
+    <changeSet id="20240909120821-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="payment_id"
+                                 baseTableName="pizza_order"
+                                 constraintName="fk_pizza_order__payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="pizza_order"
+                                 constraintName="fk_pizza_order__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_status_id"
+                                 baseTableName="pizza_order"
+                                 constraintName="fk_pizza_order__order_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_status"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pizza_order_id"
+                                 baseTableName="rel_pizza_order__dish"
+                                 constraintName="fk_rel_pizza_order__dish__pizza_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pizza_order"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="dish_id"
+                                 baseTableName="rel_pizza_order__dish"
+                                 constraintName="fk_rel_pizza_order__dish__dish_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dish"
+                                 />
+    </changeSet>
+</databaseChangeLog>

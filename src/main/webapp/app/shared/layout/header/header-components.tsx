@@ -5,6 +5,7 @@ import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJediOrder } from '@fortawesome/free-brands-svg-icons';
+import { faListCheck } from '@fortawesome/free-solid-svg-icons';
 
 export const BrandIcon = props => (
   <div {...props} className="brand-icon">
@@ -37,6 +38,15 @@ export const Wizard = () => (
   <NavItem>
     <NavLink tag={Link} to="/wizard" className="d-flex align-items-center">
       <FontAwesomeIcon icon={faJediOrder} flip={'horizontal'} />
+      <span>{'Make your new order now!'}</span>
+    </NavLink>
+  </NavItem>
+);
+
+export const OrderManagement = () => (
+  <NavItem>
+    <NavLink tag={Link} to="/order-management" className="d-flex align-items-center">
+      <FontAwesomeIcon icon={faListCheck} />
       <span>{'Make your new order now!'}</span>
     </NavLink>
   </NavItem>

@@ -16,6 +16,7 @@ import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import { useAppSelector } from 'app/config/store';
 import Wizard from 'app/modules/wizard/Wizard';
+import OrderManagementPage from 'app/modules/order-management/OrderManagementPage';
 
 const loading = <div>loading ...</div>;
 
@@ -60,6 +61,7 @@ const AppRoutes = () => {
           }
         />
         <Route path="wizard" element={<Wizard />} />
+        <Route path="order-management" element={<OrderManagementPage />} />
         <Route
           path="*"
           element={

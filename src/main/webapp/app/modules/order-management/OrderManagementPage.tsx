@@ -9,6 +9,8 @@ import { Button, Table } from 'reactstrap';
 import { IDish } from 'app/shared/model/dish.model';
 import { AUTHORITIES } from 'app/config/constants';
 import { ProgressBar } from 'react-bootstrap';
+import axios from 'axios';
+import { Storage } from 'react-jhipster';
 
 const OrderManagementPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,13 +22,33 @@ const OrderManagementPage: React.FC = () => {
 
   const ordersFiltered = isAdmin ? orders : orders.filter(pzzOrd => pzzOrd.user.id === authentication?.account?.id);
 
-  const [clickedStatus, setClickedStatus] = useState<{ [key: number]: number }>({});
-
   useEffect(() => {
     dispatch(getOrders({}));
     dispatch(getOrderStatuses({}));
     dispatch(getDishes({}));
   }, []);
+
+  useEffect(() => {
+    const eventSource = new EventSource('http://localhost:9000/api/pizza-orders/orders/stream');
+
+    eventSource.onopen = () => {
+      /* eslint-disable no-console*/
+      console.log('Open');
+      dispatch(getOrders({}));
+      eventSource.close();
+    };
+
+    // Gestione degli errori
+    eventSource.onerror = err => {
+      console.error('Errore con la connessione SSE:', err);
+      eventSource.close(); // Chiudi la connessione in caso di errore
+    };
+
+    // Chiudi la connessione SSE quando il componente viene smontato
+    return () => {
+      console.log('Close');
+    };
+  }, [orders]);
 
   const handleStatusChange = (order: IPizzaOrder, newStatus: IOrderStatus) => {
     const updatedOrder = {
@@ -34,7 +56,6 @@ const OrderManagementPage: React.FC = () => {
       orderStatus: newStatus,
     };
     dispatch(updateOrder(updatedOrder));
-    setClickedStatus(prev => ({ ...prev, [order.id]: newStatus.id }));
   };
 
   const getButtonConfig = (statusId: number, buttonId: number) => {

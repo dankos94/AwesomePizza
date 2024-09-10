@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities as getMenuSections } from 'app/entities/menu-section/menu-section.reducer';
 import { getEntities as getDishes } from 'app/entities/dish/dish.reducer';
 import { createEntity as createPayment, updateEntity as updatePayment } from 'app/entities/payment/payment.reducer';
 import { createEntity as createOrder } from 'app/entities/pizza-order/pizza-order.reducer';
-import { IDish } from 'app/shared/model/dish.model';
-import { IPaymentMethod } from 'app/shared/model/payment-method.model';
 import CartSidebar from './CartSidebar';
-import { Button, Modal, ModalBody, ModalHeader, Spinner } from 'reactstrap';
+import { useCart } from './useCart';
+import { Modal, ModalBody, ModalHeader, Spinner } from 'reactstrap';
 import dayjs from 'dayjs';
 import { IPizzaOrder } from 'app/shared/model/pizza-order.model';
 
@@ -17,30 +16,22 @@ const Wizard: React.FC = () => {
   const menuSections = useAppSelector(state => state.menuSection.entities);
   const dishes = useAppSelector(state => state.dish.entities);
 
-  const [cart, setCart] = useState<IDish[]>([]);
+  const { cart, addToCart, removeFromCart, calculateTotal, setCart } = useCart();
   const [paymentStatus, setPaymentStatus] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-
-  const addToCart = (dish: IDish) => {
-    setCart([...cart, dish]);
-  };
-
-  const removeFromCart = (dishName: string) => {
-    setCart(cart.filter(dish => dish.name !== dishName));
-  };
 
   useEffect(() => {
     dispatch(getMenuSections({}));
     dispatch(getDishes({}));
   }, [dispatch]);
 
-  const finalizeOrder = (paymentMethod: IPaymentMethod) => {
+  const finalizeOrder = paymentMethod => {
     setPaymentStatus(1);
     setShowPaymentModal(true);
 
     const paymentData = {
       paymentMethod,
-      amount: cart.reduce((total, dish) => total + dish.price, 0),
+      amount: calculateTotal(),
       paymentDate: dayjs(),
       paymentStatus: { id: 1, statusName: 'In Corso' },
     };
@@ -48,7 +39,6 @@ const Wizard: React.FC = () => {
     dispatch(createPayment(paymentData)).then(paymentResponse => {
       // @ts-expect-error tre
       const paymentId = paymentResponse.payload.data.id;
-
       setTimeout(() => {
         const acceptedPaymentData = {
           id: paymentId,

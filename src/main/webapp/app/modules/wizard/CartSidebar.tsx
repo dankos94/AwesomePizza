@@ -18,7 +18,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ cart, removeFromCart, finaliz
   // Carica i metodi di pagamento dal backend
   useEffect(() => {
     dispatch(fetchPaymentMethods({ sort: '' }));
-  }, []);
+  }, [dispatch]);
 
   const handleFinalizeOrder = () => {
     const selectedPaymentMethod = paymentMethods.find(method => method.id === selectedPaymentMethodId);
@@ -40,7 +40,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ cart, removeFromCart, finaliz
             <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
               <div className="d-flex flex-grow-1 justify-content-between align-items-center">
                 <strong className="me-3">{dish.name}</strong>
-                <span className="me-3">${dish.price}</span>
+                <span className="me-3">€{dish.price}</span>
               </div>
               <button onClick={() => removeFromCart(dish.name)} className="btn btn-danger btn-sm">
                 Rimuovi
@@ -51,9 +51,9 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ cart, removeFromCart, finaliz
       )}
       {cart.length > 0 && (
         <div className="mt-3">
-          <p className="h5">Totale: {cart.reduce((total, dish) => total + dish.price, 0)} $</p>
+          <p className="h5">Totale: {cart.reduce((total, dish) => total + dish.price, 0)} €</p>
           <label htmlFor="payment-method" className="form-label">
-            {'Metodo di pagamento'}
+            Metodo di pagamento
           </label>
           <select
             id="payment-method"

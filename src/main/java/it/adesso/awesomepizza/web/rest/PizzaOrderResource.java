@@ -81,6 +81,7 @@ public class PizzaOrderResource {
             throw new BadRequestAlertException("A new pizzaOrder cannot already have an ID", ENTITY_NAME, "idexists");
         }
         pizzaOrderDTO = pizzaOrderService.save(pizzaOrderDTO);
+        orderSink.tryEmitNext(pizzaOrderDTO);
         return ResponseEntity.created(new URI("/api/pizza-orders/" + pizzaOrderDTO.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, pizzaOrderDTO.getId().toString()))
             .body(pizzaOrderDTO);

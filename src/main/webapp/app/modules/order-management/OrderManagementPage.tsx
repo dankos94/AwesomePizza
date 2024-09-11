@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities as getOrders, updateEntity as updateOrder } from 'app/entities/pizza-order/pizza-order.reducer';
 import { getEntities as getOrderStatuses } from 'app/entities/order-status/order-status.reducer';
@@ -15,6 +15,7 @@ const OrderManagementPage: React.FC = () => {
   const isAdmin = authentication?.account?.authorities?.includes('ROLE_ADMIN');
 
   const ordersFiltered = isAdmin ? orders : orders.filter(pzzOrd => pzzOrd.user.id === authentication?.account?.id);
+  const [dataChanged, setDataChanged] = useState(false);
 
   useEffect(() => {
     dispatch(getOrders({}));
@@ -22,6 +23,27 @@ const OrderManagementPage: React.FC = () => {
     dispatch(getDishes({}));
   }, [dispatch]);
 
+  useEffect(() => {
+    // Stabilire la connessione SSE una sola volta
+    const eventSource = new EventSource('/api/pizza-orders/orders/stream');
+
+    eventSource.onopen = function (event) {
+      /* eslint-disable no-console */
+      console.log('Connessione aperta, stato connessione SSE:', eventSource.readyState);
+      dispatch(getOrders({}));
+      setDataChanged(prevState => !prevState);
+    };
+
+    eventSource.onerror = function (err) {
+      console.error('Errore con la connessione SSE:', err);
+      /* eslint-disable no-console */
+      console.log('Stato connessione SSE:', eventSource.readyState);
+      eventSource.close();
+    };
+    return () => eventSource.close();
+  }, [dataChanged]); // Usa un array vuoto come dipendenza per eseguire l'effetto solo al montaggio
+
+  // Gestione del cambiamento di stato dell'ordine
   const handleStatusChange = (order, newStatus) => {
     const updatedOrder = { ...order, orderStatus: newStatus };
     dispatch(updateOrder(updatedOrder));

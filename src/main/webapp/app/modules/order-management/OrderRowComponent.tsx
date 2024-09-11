@@ -25,7 +25,7 @@ const OrderRow: React.FC<OrderRowProps> = ({ order, orderStatuses, dishes, isAdm
           ))}
         </ul>
       </td>
-      <td>{order.totalPrice} $</td>
+      <td>{order.totalPrice} €</td>
       <td>{orderStatuses.find(os => os.id === order.orderStatus.id)?.statusName}</td>
       {isAdmin ? (
         <td>

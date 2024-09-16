@@ -11,13 +11,13 @@ import { IDish } from 'app/shared/model/dish.model';
 
 const OrderManagementPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const orders: IPizzaOrder[] = useAppSelector(state => state.pizzaOrder.entities);
-  const orderStatuses: IOrderStatus[] = useAppSelector(state => state.orderStatus.entities);
-  const dishes: IDish[] = useAppSelector(state => state.dish.entities);
+  const orders: IPizzaOrder[] = useAppSelector(state => state.pizzaOrder?.entities);
+  const orderStatuses: IOrderStatus[] = useAppSelector(state => state.orderStatus?.entities);
+  const dishes: IDish[] = useAppSelector(state => state.dish?.entities);
   const authentication = useAppSelector(state => state.authentication);
   const isAdmin = authentication?.account?.authorities?.includes('ROLE_ADMIN');
 
-  const ordersFiltered: IPizzaOrder[] = isAdmin ? orders : orders.filter(pzzOrd => pzzOrd.user.id === authentication?.account?.id);
+  const ordersFiltered: IPizzaOrder[] = isAdmin ? orders : orders?.filter(pzzOrd => pzzOrd.user.id === authentication?.account?.id);
   const [dataChanged, setDataChanged] = useState(false);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const OrderManagementPage: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {ordersFiltered.map(order => (
+          {ordersFiltered?.map(order => (
             <OrderRow
               key={order.id}
               order={order}
@@ -85,10 +85,10 @@ const OrderManagementPage: React.FC = () => {
             <th>Totale {isAdmin ? 'incassato' : 'speso'}</th>
           </tr>
           <tr>
-            <td colSpan={2}>{ordersFiltered.length}</td>
-            <td>{ordersFiltered.filter(of => of.orderStatus.id === 8).length}</td>
-            <td>{ordersFiltered.filter(of => of.orderStatus.id === 3).length}</td>
-            <td>{ordersFiltered.filter(of => of.orderStatus.id === 8).reduce((total, order) => total + order.totalPrice, 0)} €</td>
+            <td colSpan={2}>{ordersFiltered?.length}</td>
+            <td>{ordersFiltered?.filter(of => of.orderStatus.id === 8).length}</td>
+            <td>{ordersFiltered?.filter(of => of.orderStatus.id === 3).length}</td>
+            <td>{ordersFiltered?.filter(of => of.orderStatus.id === 8).reduce((total, order) => total + order.totalPrice, 0)} €</td>
           </tr>
         </tfoot>
       </Table>

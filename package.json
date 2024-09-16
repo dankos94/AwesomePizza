@@ -100,6 +100,11 @@
     "uuid": "10.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "16.0.0",
     "@types/jest": "29.5.12",
     "@types/lodash": "4.17.7",
@@ -110,6 +115,7 @@
     "@types/redux": "3.6.31",
     "@types/webpack-env": "1.18.5",
     "autoprefixer": "10.4.20",
+    "babel-jest": "^29.7.0",
     "browser-sync": "2.29.3",
     "browser-sync-webpack-plugin": "2.3.0",
     "concurrently": "8.2.2",

@@ -59,8 +59,8 @@ export const PaymentUpdate = () => {
     const entity = {
       ...paymentEntity,
       ...values,
-      paymentMethod: paymentMethods.find(it => it.id.toString() === values.paymentMethod?.toString()),
-      paymentStatus: paymentStatuses.find(it => it.id.toString() === values.paymentStatus?.toString()),
+      paymentMethod: paymentMethods?.find(it => it.id.toString() === values.paymentMethod?.toString()),
+      paymentStatus: paymentStatuses?.find(it => it.id.toString() === values.paymentStatus?.toString()),
     };
 
     if (isNew) {

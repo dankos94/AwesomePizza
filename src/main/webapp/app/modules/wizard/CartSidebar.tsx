@@ -21,7 +21,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ cart, removeFromCart, finaliz
   }, [dispatch]);
 
   const handleFinalizeOrder = () => {
-    const selectedPaymentMethod = paymentMethods.find(method => method.id === selectedPaymentMethodId);
+    const selectedPaymentMethod = paymentMethods?.find(method => method.id === selectedPaymentMethodId);
     if (selectedPaymentMethod) {
       finalizeOrder(selectedPaymentMethod);
     } else {

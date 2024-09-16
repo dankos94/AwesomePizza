@@ -12,9 +12,9 @@ import { IPizzaOrder } from 'app/shared/model/pizza-order.model';
 
 const Wizard: React.FC = () => {
   const dispatch = useAppDispatch();
-  const account = useAppSelector(state => state.authentication.account);
-  const menuSections = useAppSelector(state => state.menuSection.entities);
-  const dishes = useAppSelector(state => state.dish.entities);
+  const account = useAppSelector(state => state.authentication?.account);
+  const menuSections = useAppSelector(state => state.menuSection?.entities);
+  const dishes = useAppSelector(state => state.dish?.entities);
 
   const { cart, addToCart, removeFromCart, calculateTotal, setCart } = useCart();
   const [paymentStatus, setPaymentStatus] = useState(0);
@@ -75,13 +75,13 @@ const Wizard: React.FC = () => {
       <div className="row">
         <div className="col-md-8">
           <h1>Menu</h1>
-          {menuSections.map(section => (
+          {menuSections?.map(section => (
             <div key={section.id} className="mb-4">
               <h2>{section.name}</h2>
               <ul className="list-group">
                 {dishes
-                  .filter(dish => dish.menuSection?.id === section.id)
-                  .map(dish => (
+                  ?.filter(dish => dish.menuSection?.id === section.id)
+                  ?.map(dish => (
                     <li key={dish.id} className="list-group-item d-flex justify-content-between align-items-center">
                       <div className="d-flex flex-grow-1 justify-content-between align-items-center">
                         <strong className="me-3">{dish.name}</strong>
